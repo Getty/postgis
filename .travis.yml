@@ -13,7 +13,7 @@ install:
   - tar xvjf geos-$GEOS_VERSION.tar.bz2
   - ( cd geos-$GEOS_VERSION && ./configure --prefix=/home/travis/geos-$GEOS_VERSION && ./make && ./make install )
   - ./autogen.sh
-  - ./configure --prefix=/home/travis/geos-$GEOS_VERSION/bin/geos-config
+  - ./configure --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config
 language: c
 script:
   - ./make
