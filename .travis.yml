@@ -8,7 +8,6 @@ before_install:
   - git config --global user.name "PostGIS TravisCI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
   - sudo -l -u postgres createuser -s travis
-  - sudo echo local all all trust >>/etc/postgresql/9.1/main/pg_hba.conf
 install:
   - wget -q http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2
   - tar xvjf geos-$GEOS_VERSION.tar.bz2
