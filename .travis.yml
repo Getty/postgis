@@ -4,7 +4,7 @@ env:
     - GEOS_VERSION=3.4.1
 before_install:
   - rm .travis.yml
-  - sudo apt-get install -qq postgresql-9.1 build-essential flex autoconf libtool gdb gfortran postgresql-plpython-9.1 postgresql-server-dev-all python-psycopg2 xsltproc libproj-dev python2.7-dev dblatex 
+  - sudo apt-get install -qq postgresql-9.1 build-essential flex autoconf libtool gdb gfortran postgresql-plpython-9.1 postgresql-server-dev-all python-psycopg2 xsltproc libproj-dev python2.7-dev dblatex libgdal-dev xsltproc
   - git config --global user.name "PostGIS TravisCI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
   - sudo -l -u postgres createuser -s travis
