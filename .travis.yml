@@ -11,7 +11,7 @@ before_install:
 install:
   - wget -q http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2
   - tar xvjf geos-$GEOS_VERSION.tar.bz2
-  - ( cd geos-$GEOS_VERSION && ./configure --prefix=/home/travis/geos-$GEOS_VERSION && ./make && ./make install )
+  - ( cd geos-$GEOS_VERSION && ./configure --prefix=/home/travis/geos-$GEOS_VERSION && make && make install )
   - ./autogen.sh
   - ./configure --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config
 language: c
