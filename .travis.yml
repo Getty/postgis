@@ -1,16 +1,20 @@
 ---
+env:
+  matrix:
+    - GEOS_VERSION=3.4.1
 before_install:
   - rm .travis.yml
-  - sudo apt-get install -qq postgresql-9.1 build-essential libgeos-dev flex autoconf libtool gdb gfortran postgresql-plpython-9.1 postgresql-server-dev-all python-psycopg2 xsltproc libproj-dev python2.7-dev dblatex 
+  - sudo apt-get install -qq postgresql-9.1 build-essential flex autoconf libtool gdb gfortran postgresql-plpython-9.1 postgresql-server-dev-all python-psycopg2 xsltproc libproj-dev python2.7-dev dblatex 
   - git config --global user.name "PostGIS TravisCI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
-  - wget -q http://download.osgeo.org/geos/geos-3.4.1.tar.bz2
-  - tar xvjf geos-3.4.1.tar.bz2
-  - whoami
-  - sudo -l -u postgres createuser -s postgis
+  - sudo -l -u postgres createuser -s travis
+  - sudo echo local all all trust >>/etc/postgresql/9.1/main/pg_hba.conf
 install:
+  - wget -q http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2
+  - tar xvjf geos-$GEOS_VERSION.tar.bz2
+  - ( cd geos-$GEOS_VERSION && ./configure --prefix=/home/travis/geos-$GEOS_VERSION)
   - ./autogen.sh
-  - ./configure
+  - ./configure --prefix=/home/travis/geos-$GEOS_VERSION/bin/geos-config
 language: c
 script:
   - ./make
