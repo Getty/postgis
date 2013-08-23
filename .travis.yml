@@ -1,20 +1,25 @@
 ---
 env:
+  global:
+    - GDAL_VERSION=1.9.2
   matrix:
     - GEOS_VERSION=3.4.1
+    - GEOS_VERSION=3.3.8
 before_install:
   - rm .travis.yml
   - sudo apt-get update
-  - sudo apt-get install -qq postgresql-9.1 build-essential flex autoconf libtool gdb gfortran postgresql-plpython-9.1 postgresql-server-dev-all python-psycopg2 xsltproc libproj-dev python2.7-dev dblatex libgdal-dev xsltproc
+  - sudo apt-get install -qq postgresql-9.1 build-essential flex autoconf libtool gfortran postgresql-server-dev-all xsltproc libproj-dev dblatex libgdal-dev xsltproc
   - git config --global user.name "PostGIS TravisCI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
   - sudo -l -u postgres createuser -s travis
 install:
-  - wget -q http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2
-  - tar xvjf geos-$GEOS_VERSION.tar.bz2
-  - ( cd geos-$GEOS_VERSION && ./configure --prefix=/home/travis/geos-$GEOS_VERSION && make && make install )
+  - export LSB_RELEASE=$( lsb_release -rs )
+  - wget -q http://stardestroyer.de/geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz
+  - tar -C / xvjf geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz
+  - wget -q http://stardestroyer.de/gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz
+  - tar -C / xvjf geos-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz
   - ./autogen.sh
-  - ./configure --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config
+  - ./configure --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config
 language: c
 script:
   - ./make
