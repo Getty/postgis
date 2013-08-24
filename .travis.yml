@@ -10,6 +10,7 @@ before_install:
   - rm .travis.yml
   - sudo apt-get update
   - sudo apt-get install -qq build-essential flex autoconf libtool gfortran postgresql-server-dev-all xsltproc libproj-dev dblatex libgdal-dev xsltproc
+  - sudo apt-get remove libgeos-3.2.2 libgeos-c1 libgeos-dev libgdall-1.7.0 libgdall-dev
   - git config --global user.name "PostGIS TravisCI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
 install:
@@ -23,12 +24,6 @@ install:
 language: c
 script:
   - make
-  - sudo chown postgres.postgres -R *
-  - sudo -u postgres make check
+  - make check
 after_failure:
   - cat /tmp/pgis_reg/*
-  - find / | grep geos
-  - dpkg --get-selections | grep geos
-  - dpkg --get-selections | grep gdal
-  - dpkg --get-selections | grep gis
-
