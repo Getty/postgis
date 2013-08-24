@@ -9,7 +9,7 @@ env:
 before_install:
   - rm .travis.yml
   - sudo apt-get update
-  - sudo apt-get install -qq build-essential flex autoconf libtool gfortran postgresql-server-dev-all xsltproc libproj-dev dblatex libgdal-dev xsltproc
+  - sudo apt-get install -qq build-essential flex autoconf libtool gfortran postgresql-server-dev-all xsltproc libproj-dev dblatex xsltproc
   - sudo apt-get remove libgeos-3.2.2 libgeos-c1 libgeos-dev libgdal1-1.7.0 libgdal1-dev
   - git config --global user.name "PostGIS TravisCI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
