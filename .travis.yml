@@ -27,3 +27,4 @@ script:
   - sudo -u postgres make check
 after_failure:
   - cat /tmp/pgis_reg/*
+  - find / | grep geos
