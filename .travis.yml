@@ -23,6 +23,7 @@ install:
 language: c
 script:
   - make
+  - sudo chown postgres.postgres -R *
   - sudo -u postgres make check
 after_failure:
   - cat /tmp/pgis_reg/*
