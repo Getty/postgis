@@ -19,4 +19,5 @@ script:
   - make
   - make check RUNTESTFLAGS=-v
 after_failure:
+  - cat /tmp/travis.*
   - cat /tmp/pgis_reg/*

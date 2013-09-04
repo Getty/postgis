@@ -21,15 +21,13 @@ export LD_LIBRARY_PATH="$GDAL_PATH/lib:$LD_LIBRARY_PATH"
 export POSTGRES_PATH="/home/travis/postgresql-$POSTGRES_VERSION"
 export PATH="$POSTGRES_PATH/bin:$PATH"
 export LD_LIBRARY_PATH="$POSTGRES_PATH/lib:$LD_LIBRARY_PATH"
+export PGDATABASE=travis
+export PGUSER=travis
+export PGLOCALEDIR="${POSTGRES_PATH}/share/locale"
 
-wget -q http://stardestroyer.de/travis/geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz
-tar xvzf geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz -C /
+set
 
-wget -q http://stardestroyer.de/travis/gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz
-tar xvzf gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
-
-wget -q http://stardestroyer.de/travis/postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz
-tar xvzf postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
+$POSTGRES_PATH/bin/postmaster & >>/tmp/travis.postgres.$POSTGRES_VERSION.log 2>&1
 
 cd $REPO_DIR
 
