@@ -44,5 +44,5 @@ cd $REPO_DIR
 ./autogen.sh
 ./configure \
   --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config \
-  --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config
+  --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config \
   --with-pgconfig=/home/travis/postgresql-$POSTGRES_VERSION/bin/pg_config
