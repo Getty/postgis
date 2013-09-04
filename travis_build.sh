@@ -37,6 +37,8 @@ $POSTGRES_PATH/bin/postmaster _D $PGDATA & >>$PGDATA/start.log 2>&1
 
 sleep 10
 
+cat $PGDATA/start.log
+
 cd $REPO_DIR
 
 ./autogen.sh
