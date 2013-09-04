@@ -3,11 +3,11 @@ env:
   global:
     - PGUSER=postgres
   matrix:
-    - GEOS_VERSION=3.4.1 GDAL_VERSION=1.9.2
+    - GEOS_VERSION=3.4.1
+    - GDAL_VERSION=1.9.2
+    - POSTGRES_VERSION=9.1
 before_install:
   - rm .travis.yml
-  - sudo apt-get update
-  - sudo apt-get install -qq build-essential flex autoconf libtool gfortran postgresql-server-dev-all xsltproc libjson0-dev libproj-dev dblatex xsltproc libcunit1-dev libcunit1 docbook-xsl docbook-mathml
   - git config --global user.name "PostGIS Travis CI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
 install:
