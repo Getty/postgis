@@ -3,7 +3,7 @@ env:
   global:
     - PGUSER=postgres
   matrix:
-    - GEOS_VERSION=3.4.1 GDAL_VERSION=1.10.0
+    - GEOS_VERSION=3.4.1 GDAL_VERSION=1.9.2
 before_install:
   - rm .travis.yml
   - sudo apt-get update
