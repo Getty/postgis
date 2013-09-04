@@ -59,3 +59,6 @@ cd $REPO_DIR
   --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config \
   --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config \
   --with-pgconfig=/home/travis/postgresql-$POSTGRES_VERSION/bin/pg_config
+
+make
+make check RUNTESTFLAGS=-v
