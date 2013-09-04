@@ -8,10 +8,12 @@ before_install:
   - rm .travis.yml
   - git config --global user.name "PostGIS Travis CI"
   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
+install:
+  - ./travis_install.sh
 language: c
 compiler:
   - gcc
 script:
-  - ./travis_install.sh
+  - ./travis_build.sh
 after_failure:
   - cat /tmp/pgis_reg/*
