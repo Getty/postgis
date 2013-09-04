@@ -3,6 +3,7 @@
 REPO_DIR=$( pwd )
 
 set -x
+set -e
 
 sudo apt-get update
 sudo apt-get remove postgresql-9.1
