@@ -20,29 +20,32 @@ tar xvzf gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz -C /
 wget -q http://stardestroyer.de/travis/postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz
 tar xvzf postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
 
-export GEOS_PATH="/home/travis/geos-$GEOS_VERSION"
-export PATH="$GEOS_PATH/bin:$PATH"
-export LD_LIBRARY_PATH="$GEOS_PATH/lib"
+export GEOS_PATH="/home/travis/geos-${GEOS_VERSION}"
+export PATH="${GEOS_PATH}/bin:$PATH"
+export LD_LIBRARY_PATH="${GEOS_PATH}/lib"
 
-export GDAL_PATH="/home/travis/gdal-$GDAL_VERSION"
-export PATH="$GDAL_PATH/bin:$PATH"
-export LD_LIBRARY_PATH="$GDAL_PATH/lib:$LD_LIBRARY_PATH"
+export GDAL_PATH="/home/travis/gdal-${GDAL_VERSION}"
+export PATH="${GDAL_PATH}/bin:$PATH"
+export LD_LIBRARY_PATH="${GDAL_PATH}/lib:$LD_LIBRARY_PATH"
 
-export POSTGRES_PATH="/home/travis/postgresql-$POSTGRES_VERSION"
-export PATH="$POSTGRES_PATH/bin:$PATH"
-export LD_LIBRARY_PATH="$POSTGRES_PATH/lib:$LD_LIBRARY_PATH"
+export POSTGRES_PATH="/home/travis/postgresql-${POSTGRES_VERSION}"
+export PATH="${POSTGRES_PATH}/bin:$PATH"
+export LD_LIBRARY_PATH="${POSTGRES_PATH}/lib:$LD_LIBRARY_PATH"
 
 export PGDATABASE="travis"
 export PGUSER="travis"
 export PGLOCALEDIR="${POSTGRES_PATH}/share/locale"
+export PGDATA="${POSTGRES_PATH}/data"
 
 set
 
-$POSTGRES_PATH/bin/postmaster & >>/tmp/travis.postgres.$POSTGRES_VERSION.log 2>&1
+mkdir $PGDATA
+
+$POSTGRES_PATH/bin/pg_ctl -l logfile start
 
 sleep 10
 
-cat /tmp/travis.postgres.$POSTGRES_VERSION.log
+find $PGDATA
 
 cd $REPO_DIR
 
