@@ -15,8 +15,6 @@ install:
 language: c
 compiler:
   - gcc
-notifications:
-  email: false
 script:
   - make
   - make check RUNTESTFLAGS=-v
