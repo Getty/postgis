@@ -12,13 +12,13 @@ sudo apt-get install -qq build-essential flex autoconf libtool gfortran postgres
 export LSB_RELEASE=$( lsb_release -rs )
 
 wget -q http://stardestroyer.de/travis/geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz
-tar xvzf geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz -C /
+tar xzf geos-$GEOS_VERSION.travis.$LSB_RELEASE.tar.gz -C /
 
 wget -q http://stardestroyer.de/travis/gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz
-tar xvzf gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
+tar xzf gdal-$GDAL_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
 
 wget -q http://stardestroyer.de/travis/postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz
-tar xvzf postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
+tar xzf postgresql-$POSTGRES_VERSION.travis.$LSB_RELEASE.tar.gz -C / 
 
 export GEOS_PATH="/home/travis/geos-${GEOS_VERSION}"
 export PATH="${GEOS_PATH}/bin:$PATH"
@@ -40,6 +40,7 @@ export PGDATA="${POSTGRES_PATH}/data"
 set
 
 mkdir $PGDATA
+initdb --locale=en_US.UTF-8 --encoding=UNICODE
 
 $POSTGRES_PATH/bin/pg_ctl -l logfile start
 
