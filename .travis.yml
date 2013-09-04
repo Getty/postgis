@@ -1,7 +1,7 @@
 ---
 env:
   global:
-    - POSTGRES_VERSION=9.1
+    - POSTGRES_VERSION=9.1.0
   matrix:
     - GEOS_VERSION=3.4.1 GDAL_VERSION=1.9.2
 before_install:
