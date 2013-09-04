@@ -28,8 +28,8 @@ mkdir $PGDATA
 
 initdb --locale=en_US.UTF-8 --encoding=UNICODE
 
-echo "unix_socket_directory=${PGDATA}\n" >>$PGDATA/postgresql.conf
-echo "unix_socket_permissions=0777\n" >>$PGDATA/postgresql.conf
+echo "unix_socket_directory=/tmp" >>$PGDATA/postgresql.conf
+echo "unix_socket_permissions=0777" >>$PGDATA/postgresql.conf
 
 cat $PGDATA/postgresql.conf
 
