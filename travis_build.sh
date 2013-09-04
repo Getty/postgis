@@ -33,7 +33,7 @@ echo "unix_socket_permissions=0777" >>$PGDATA/postgresql.conf
 
 cat $PGDATA/postgresql.conf
 
-$POSTGRES_PATH/bin/postmaster _D $PGDATA & >>$PGDATA/start.log 2>&1
+$POSTGRES_PATH/bin/postmaster -D $PGDATA & >>$PGDATA/start.log 2>&1
 
 sleep 10
 
