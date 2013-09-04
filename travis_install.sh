@@ -40,13 +40,15 @@ export PGDATA="${POSTGRES_PATH}/data"
 set
 
 mkdir $PGDATA
+
+echo "unix_socket_directory=${PGDATA}\n" >$PGDATA/postgresql.conf
+echo "unix_socket_permissions=0777\n" >>$PGDATA/postgresql.conf
+
 initdb --locale=en_US.UTF-8 --encoding=UNICODE
 
 $POSTGRES_PATH/bin/pg_ctl -l logfile start
 
 sleep 10
-
-find $PGDATA
 
 cd $REPO_DIR
 
