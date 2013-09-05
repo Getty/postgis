@@ -24,11 +24,21 @@ export PGDATA="${POSTGRES_PATH}/data"
 
 set
 
+cd $REPO_DIR
+
+./autogen.sh
+./configure \
+  --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config \
+  --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config \
+  --with-pgconfig=/home/travis/postgresql-$POSTGRES_VERSION/bin/pg_config
+
+make
+
 mkdir $PGDATA
 
 initdb --locale=en_US.UTF-8 --encoding=UNICODE
 
-echo "unix_socket_directory=/tmp" >>$PGDATA/postgresql.conf
+echo "unix_socket_directory='/tmp'" >>$PGDATA/postgresql.conf
 echo "unix_socket_permissions=0777" >>$PGDATA/postgresql.conf
 
 cat $PGDATA/postgresql.conf
@@ -39,13 +49,4 @@ sleep 10
 
 cat $PGDATA/start.log
 
-cd $REPO_DIR
-
-./autogen.sh
-./configure \
-  --with-geosconfig=/home/travis/geos-$GEOS_VERSION/bin/geos-config \
-  --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config \
-  --with-pgconfig=/home/travis/postgresql-$POSTGRES_VERSION/bin/pg_config
-
-make
 make check RUNTESTFLAGS=-v
