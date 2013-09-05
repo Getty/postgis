@@ -32,7 +32,7 @@ cd $REPO_DIR
   --with-gdalconfig=/home/travis/gdal-$GDAL_VERSION/bin/gdal-config \
   --with-pgconfig=/home/travis/postgresql-$POSTGRES_VERSION/bin/pg_config
 
-make
+make || exit 1
 
 mkdir $PGDATA
 
@@ -49,4 +49,4 @@ sleep 10
 
 cat $PGDATA/start.log
 
-make check RUNTESTFLAGS=-v
+make check RUNTESTFLAGS=-v || exit 1
